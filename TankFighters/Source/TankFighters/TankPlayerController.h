@@ -19,7 +19,7 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-
+	
 private:
 	ATank* GetControlledTank() const;
 
@@ -32,6 +32,13 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float CrossHairXLocation = 0.5;
+
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.33333;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+	float LineTraceRange = 10000.f;
+
+	bool GetLookVectorHitLocation();
 };

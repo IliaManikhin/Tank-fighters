@@ -2,6 +2,7 @@
 
 
 #include "TankPlayerController.h"
+#include "Engine/World.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -54,10 +55,39 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-	
 
+	FVector LookDirection;
 	// De-project the crosshair position to a world direction
-	//Line trace along that look direction, and see what we hit (up to max range)
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		//Line trace along that look direction, and see what we hit (up to max range)
+		// GetLookVectorHitLocation()
+	}
+	
 
 	return true;
 } 
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	FVector CameraWorldLocation; // to be discarded 
+
+	return DeprojectScreenPositionToWorld
+	(
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
+		LookDirection
+	);
+
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation()
+{
+	bool LineTraceSingleByChannel
+	(
+
+		)
+
+	return false;
+}
