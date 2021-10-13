@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Tank.h"
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay()
@@ -19,7 +19,22 @@ void ATankAIController::BeginPlay()
 	}
 }
 
-ATank* ATankAIController::GetControlledAITank() const
+void ATankAIController::Tick(float DeltaTime)
+{
+	if (GetPlayerTank())
+	{
+		//TODO Move towards the player
+
+		//Aim towards the player
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+
+		//Shoot if we ready
+
+	}
+
+}
+
+ATank* ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
 }
