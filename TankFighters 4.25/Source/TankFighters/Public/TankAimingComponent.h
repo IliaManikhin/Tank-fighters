@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-
 #include "TankAimingComponent.generated.h"
 
 class UTankBarrel; // Forward declaration 
