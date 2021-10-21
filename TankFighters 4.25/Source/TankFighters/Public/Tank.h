@@ -10,6 +10,7 @@
 class UTankBarrel;
 class UTankAimingComponent;
 class UTankTurret;
+class UTankTrack;
 class AProjectile;
 
 UCLASS()
@@ -38,6 +39,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	//UFUNCTION(BlueprintCallable, Category = Setup)
+	//void SetTrackReference(UTankTrack* TrackToSet);
+
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable)
@@ -51,7 +55,7 @@ private:
 	float LaunchSpeed = 4000; 
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float ReloadTimeInSeconds = 3;
+	float ReloadTimeInSeconds = 3;
 
 	// Local barrel reference for spawn projectiles
 	UTankBarrel* Barrel = nullptr;
