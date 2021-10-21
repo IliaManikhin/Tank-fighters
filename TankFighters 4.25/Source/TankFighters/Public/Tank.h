@@ -9,6 +9,7 @@
 // Forward declarations
 class UTankBarrel;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class UTankTurret;
 class UTankTrack;
 class AProjectile;
@@ -28,6 +29,9 @@ protected:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+
 public:	
 	
 	// Called to bind functionality to input
@@ -38,9 +42,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
-
-	//UFUNCTION(BlueprintCallable, Category = Setup)
-	//void SetTrackReference(UTankTrack* TrackToSet);
 
 	void AimAt(FVector HitLocation);
 
