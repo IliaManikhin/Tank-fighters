@@ -14,11 +14,12 @@ class TANKFIGHTERS_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
-private:
+public:
 	// Set throttle between -1 and +1
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float Throttle);
 
+private:
 	// Max force per tack, in Newtons 
 	UPROPERTY(EditDefaultsOnly)
 	float TrackMaxDrivingForce = 400000; // We get 40 tonne mass tank and acceleration 10 m/s
