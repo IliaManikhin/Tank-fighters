@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Manikhin Ilia 2021
 
 #pragma once
 
@@ -16,7 +16,7 @@ class TANKFIGHTERS_API UTankTrack : public UStaticMeshComponent
 	
 public:
 	// Set throttle between -1 and +1
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
 
 private:
