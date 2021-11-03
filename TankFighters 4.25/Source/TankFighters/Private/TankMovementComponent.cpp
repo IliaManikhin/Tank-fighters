@@ -1,7 +1,8 @@
 // Copyright Manikhin Ilia 2021
 
-#include "TankTrack.h"
 #include "TankMovementComponent.h" 
+#include "TankTrack.h"
+
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
