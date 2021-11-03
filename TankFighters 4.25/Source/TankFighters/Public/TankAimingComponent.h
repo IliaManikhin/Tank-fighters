@@ -30,10 +30,14 @@ public:
 public:	
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+	// delete those two down stares
+	//void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	// Set turret reference
-	void SetTurretReference(UTankTurret* TurretToSet);
+	//void SetTurretReference(UTankTurret* TurretToSet);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")

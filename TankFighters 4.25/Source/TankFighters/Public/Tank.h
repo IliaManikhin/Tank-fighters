@@ -34,19 +34,9 @@ protected:
 	UTankMovementComponent* TankMovementComponent = nullptr;
 
 public:	
-	
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetTurretReference(UTankTurret* TurretToSet);
-
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
 private:
@@ -59,9 +49,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
-	// Local barrel reference for spawn projectiles
-	UTankBarrel* Barrel = nullptr;
-
 	double LastFireTime = 0;
 	
+	// Local barrel reference for spawn projectiles
+	UTankBarrel* Barrel = nullptr;  //TODO remove
 };
