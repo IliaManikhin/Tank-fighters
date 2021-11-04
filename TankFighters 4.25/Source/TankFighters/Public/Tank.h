@@ -8,8 +8,7 @@
 
 // Forward declarations
 class UTankBarrel;
-class UTankAimingComponent;
-class UTankMovementComponent;
+class UTankAimingComponent; 
 class UTankTurret;
 class UTankTrack;
 class AProjectile;
@@ -29,9 +28,6 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
 
 public:	
 	void AimAt(FVector HitLocation);
