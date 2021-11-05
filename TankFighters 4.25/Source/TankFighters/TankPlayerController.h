@@ -1,12 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Manikhin Ilia 2021
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
-
-class ATank;
 
 /**
  * 
@@ -22,9 +20,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 

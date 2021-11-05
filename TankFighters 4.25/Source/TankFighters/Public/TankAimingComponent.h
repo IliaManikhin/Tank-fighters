@@ -28,17 +28,13 @@ public:
 	UTankAimingComponent();
 
 public:	
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	
+	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-	// delete those two down stares
-	//void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	// Set turret reference
-	//void SetTurretReference(UTankTurret* TurretToSet);
-
+	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 	EFiringState FiringState = EFiringState::Reloading;
@@ -47,6 +43,9 @@ private:
 	UTankBarrel* Barrel = nullptr;
 
 	UTankTurret* Turret = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000;
 
 	void MoveBarrelTowards(FVector AimDirection);
 

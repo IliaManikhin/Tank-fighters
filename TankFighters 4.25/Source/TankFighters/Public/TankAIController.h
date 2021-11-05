@@ -6,7 +6,7 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
+
 
 /**
  * 
@@ -21,6 +21,10 @@ public:
 
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 private:
 	// How close can AI tank get
