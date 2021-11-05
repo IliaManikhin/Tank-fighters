@@ -26,8 +26,7 @@ void ATankAIController::Tick(float DeltaTime)
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
 	//Shoot if we ready
-	// TODO fix firing
-	//AimingComponent->Fire(); // TODO dont fire every frame
+	AimingComponent->Fire(); // TODO dont fire every frame
 	
 
 }
