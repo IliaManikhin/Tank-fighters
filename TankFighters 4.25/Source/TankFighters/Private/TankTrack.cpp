@@ -5,7 +5,7 @@
 
 UTankTrack::UTankTrack()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UTankTrack::BeginPlay()
@@ -18,33 +18,42 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, FVector NormalImpulse, const FHitResult & Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("IM HIT HIT HIT "))
+	DriveTrack();
+	ApplySidewaysForce();
+	CurrentThrottle = 0;
+
+	//UE_LOG(LogTemp, Warning, TEXT("IM HIT HIT HIT "))
+
 }
 
-void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UTankTrack::ApplySidewaysForce()
 {
 	// Calculate  slipage speed
 	auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
 
+	auto DeltaTime = GetWorld()->GetDeltaSeconds();
 	// Acceleration for current frame 
 	auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
 
 	//Calculate and apply sideways
-	auto TankRoot =Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
-	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // Two meams numbers of tracks 
-	TankRoot->AddForce(CorrectionForce); 
-
-	
+	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
+	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // Two means numbers of tracks 
+	TankRoot->AddForce(CorrectionForce);
 }
 
 
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-	auto ForceAplied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
+	CurrentThrottle =FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
+
+}
+
+void UTankTrack::DriveTrack()
+{
+	auto ForceAplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
 	auto ForceLocation = GetComponentLocation();
 	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	TankRoot->AddForceAtLocation(ForceAplied, ForceLocation); 
-
+	TankRoot->AddForceAtLocation(ForceAplied, ForceLocation);
 }
 

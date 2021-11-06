@@ -26,7 +26,7 @@ private:
 
 	virtual void BeginPlay() override;
 
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	void ApplySidewaysForce();
 
 	// Max force per tack, in Newtons 
 	UPROPERTY(EditDefaultsOnly)
@@ -34,5 +34,8 @@ private:
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-	//(FComponentHitSignature, UPrimitiveComponent, OnComponentHit, UPrimitiveComponent*, HitComponent, AActor*, OtherActor, UPrimitiveComponent*, OtherComp, FVector, NormalImpulse, const FHitResult&, Hit);
+
+	void DriveTrack();
+
+	float CurrentThrottle = 0;
 };
