@@ -6,8 +6,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-
-
 /**
  * 
  */
@@ -26,7 +24,12 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
-private:
 	// How close can AI tank get
-	float AcceptanceRadius = 3000;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup") 
+	float AcceptanceRadius = 8000;
+
+private:
+	
+
+	
 };
