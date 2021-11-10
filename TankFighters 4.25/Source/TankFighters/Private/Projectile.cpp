@@ -3,6 +3,7 @@
 
 #include "Projectile.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -55,6 +56,16 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
+	
+	UGameplayStatics::ApplyRadialDamage
+	(
+		this,
+		ProjectileDamage,
+		GetActorLocation(), // Damage will be in projectile location
+		ExplosionForce->Radius, // Radius of damage , if we change in BP ExplosionForce then here we have changes 
+		UDamageType::StaticClass(),
+		TArray<AActor*>() // Damage all actors
+		);
 
 	FTimerHandle Timer;
 

@@ -7,12 +7,30 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+
 }
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+float ATank::TakeDamage( float DamageAmount,struct FDamageEvent const& DamageEvent,class AController* EventInstigator,AActor* DamageCauser)
+{
+	int32 DamagePoints = FMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth); // Tank health wont down less zero
+
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("We will die for the emperor!"))
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("DamageAmount: %f, DamageToApply %i"), DamageAmount, DamageToApply)
+
+
+	return DamageToApply;
 }
 
 
