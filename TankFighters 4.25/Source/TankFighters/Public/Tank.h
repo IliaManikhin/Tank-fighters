@@ -14,20 +14,21 @@ class TANKFIGHTERS_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	ATank();
+	virtual float TakeDamage(float DamageAmount,struct FDamageEvent const& DamageEvent,class AController* EventInstigator,AActor* DamageCauser) override;
 
+	// Return current health percentage of starting health, between 0 and 1
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercent() const;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	virtual float TakeDamage(float DamageAmount,
-		struct FDamageEvent const& DamageEvent,
-		class AController* EventInstigator,
-		AActor* DamageCauser) override;
-
 private:
+	// Sets default values for this pawn's properties
+	ATank();
+
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 StartingHealth = 100;
 
