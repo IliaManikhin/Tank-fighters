@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 #include "Engine/World.h"
+#include "Tank.h" // So we can use OnDeath
 
 void ATankPlayerController::BeginPlay()
 {
@@ -20,6 +21,20 @@ void ATankPlayerController::Tick(float DeltaTime)
 	 AimTowardsCrosshair();
 
 }
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		auto PosessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PosessedTank)) { return; }
+		// Subscribe our local method to OnDeath
+		PosessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPosessedTankDeath);
+	}
+}
+
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
@@ -95,4 +110,8 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 
 }
 
-
+void ATankPlayerController::OnPosessedTankDeath()
+{
+	StartSpectatingOnly();
+	UE_LOG(LogTemp, Warning, TEXT("PLAYER PLAYER IS DEAD , DELEGATE SAY"))
+}
