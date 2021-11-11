@@ -8,6 +8,7 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	
 }
 
 float ATank::GetHealthPercent() const
@@ -29,11 +30,10 @@ float ATank::TakeDamage( float DamageAmount,struct FDamageEvent const& DamageEve
 	CurrentHealth -= DamageToApply;
 	if (CurrentHealth <= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("We will die for the emperor!"))
+		OnDeath.Broadcast();
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("DamageAmount: %f, DamageToApply %i"), DamageAmount, DamageToApply)
-
+	//UE_LOG(LogTemp, Warning, TEXT("DamageAmount: %f, DamageToApply %i"), DamageAmount, DamageToApply)
 
 	return DamageToApply;
 }

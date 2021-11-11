@@ -2,12 +2,29 @@
 
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
+#include "Tank.h" // So we can impliment OnDeath, because this clas have no info about ATank
 
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		auto PosessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PosessedTank)) { return; }
+		// Subscribe our local method to OnDeath
+		PosessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPosessedTankDeath);
+	}
+
+	 
+
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -33,6 +50,11 @@ void ATankAIController::Tick(float DeltaTime)
 	
 
 
+}
+
+void ATankAIController::OnPosessedTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("TANK IS DEAD , DELEGATE SAY"))
 }
 
 
